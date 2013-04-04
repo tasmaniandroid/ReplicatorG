@@ -566,10 +566,19 @@ public class GCodeParser {
 		case M141: // skeinforge chamber plugin chamber temperature code
 		case M142: // skeinforge chamber plugin holding pressure code
 			break;
-		
 		// initialize to default state.
 		case M200:
 			commands.add(new replicatorg.drivers.commands.Initialize());
+			break;
+		// play beep
+		case M214:
+			int num = 0;
+			int dur = 0;
+			int rep = 0;
+			if (gcode.hasCode('I')) num = (int) gcode.getCodeValue('I');
+			if (gcode.hasCode('J')) dur = (int) gcode.getCodeValue('J');
+			if (gcode.hasCode('K')) rep = (int) gcode.getCodeValue('K');
+			commands.add(new replicatorg.drivers.commands.SendBeep(num, dur, rep));
 			break;
 		// set servo 1 position
 		case M300:

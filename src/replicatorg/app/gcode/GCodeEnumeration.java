@@ -78,6 +78,7 @@ public enum GCodeEnumeration {
 	M141("M", 141, "Set Chamber Temperature (Ignored)"),
 	M142("M", 142, "Set Chamber Holding Pressure (Ignored)"),
 	M200("M", 200, "Reset driver"),
+	M214("M", 214, "Beep. Defaults 0 for I, J, and K"),
 	M300("M", 300, "Set Servo 1 Position"),
 	M301("M", 301, "Set Servo 2 Position"),
 	M310("M", 310, "Start data capture"),
