@@ -200,6 +200,7 @@ public class PreferencesWindow extends JFrame implements GuiConstants {
 		addCheckboxForPref(content,"Show experimental machine profiles","machine.showExperimental",false);
 		addCheckboxForPref(content,"Review GCode for potential toolhead problems before building","build.safetyChecks",true);
 		addCheckboxForPref(content,"Break Z motion into separate moves (normally false)","replicatorg.parser.breakzmoves",false);
+		addCheckboxForPref(content,"Show upload to SD button","ui.show_uploadButton",false);
 		addCheckboxForPref(content,"Show starfield in model preview window","ui.show_starfield",false);
 		addCheckboxForPref(content,"Notifications in System tray","ui.preferSystemTrayNotifications",false);
 		addCheckboxForPref(content,"Automatically regenerate gcode when building from model view.","build.autoGenerateGcode",true);

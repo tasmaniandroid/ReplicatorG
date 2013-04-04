@@ -169,6 +169,10 @@ public class MainButtonPanel extends BGPanel implements MachineListener, ActionL
 
 		buildButton = makeButton("Build", "images/button-build.png");
 		add(buildButton);
+		uploadButton = makeButton("Upload to SD card", "images/button-upload.png");
+		if(Base.preferences.getBoolean("ui.show_uploadButton", true)) {
+			add(uploadButton);
+		}
 
 		playbackButton = makeButton("Build from SD card currently in printer", "images/button-playback.png");
 		add(playbackButton);
@@ -201,6 +205,7 @@ public class MainButtonPanel extends BGPanel implements MachineListener, ActionL
 		add(statusLabel, "gap unrelated");
 
 		playbackButton.setToolTipText("This will build an object from an SD card currently inserted in the printer");
+		uploadButton.setToolTipText("This will convert and send the current gcode to the SD card in the printer. May take a long time.");
 		fileButton.setToolTipText("This will generate an .s3g file that can be put on an SD card and printed locally on the printer.");
 		generateButton.setToolTipText("This will generate gcode for the currently open model.");
 		buildButton.setToolTipText("This will start building the object on the machine.");
@@ -298,6 +303,7 @@ public class MainButtonPanel extends BGPanel implements MachineListener, ActionL
 		
 		fileButton.setEnabled(!building && hasGcode);
 		buildButton.setEnabled(readyToPrint);
+		uploadButton.setEnabled(readyToPrint && hasPlayback && hasGcode);
 		generateButton.setEnabled(hasModel);
 		playbackButton.setEnabled(readyToPrint && hasPlayback);
 		pauseButton.setEnabled(building && connected);
@@ -309,6 +315,7 @@ public class MainButtonPanel extends BGPanel implements MachineListener, ActionL
 		Machine.JobTarget runningTarget = s.isBuilding()?machine.getTarget():null;
 		
 		buildButton.setSelected(runningTarget == Machine.JobTarget.MACHINE);
+		uploadButton.setSelected(runningTarget == Machine.JobTarget.REMOTE_FILE);
 		fileButton.setSelected(runningTarget == Machine.JobTarget.FILE);
 		playbackButton.setSelected(runningTarget == Machine.JobTarget.NONE);
 
